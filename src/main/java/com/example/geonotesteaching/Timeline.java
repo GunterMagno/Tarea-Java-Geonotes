@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-final class Timeline {
+public final class Timeline {
     private final Map<Long, Note> notes = new LinkedHashMap<>();
 
     public void addNote(Note note) { notes.put(note.id(), note); }
