@@ -24,6 +24,11 @@ public class GeoNotes {
                     case 3 -> filterNotes();
                     case 4 -> exportNotesToJson();
                     case 5 -> running = false;
+                    case 6 -> {
+                        Exporter exporter = new MarkdownExporter(timeline);
+                        System.out.println(exporter.export());
+                    }
+
                     default -> System.out.println("❌ Opción no válida. Inténtalo de nuevo.");
                 }
             } catch (NumberFormatException e) {

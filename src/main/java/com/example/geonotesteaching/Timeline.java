@@ -17,20 +17,27 @@ public final class Timeline {
             var notesList = notes.values().stream()
                 .map(note -> """
                         {
-                          "id": %d,
-                          "title": "%s",
-                          "content": "%s",
-                          "location": { "lat": %f, "lon": %f },
-                          "createdAt": "%s"
+                            "id": %d,
+                            "title": "%s",
+                            "content": "%s",
+                            "location": {
+                                "lat": %f,
+                                "lon": %f
+                            },
+                            "createdAt": "%s"
                         }
                         """.formatted(
-                            note.id(), note.title(), note.content(),
+                            note.id(), note.title(), note.content().replace("\"","\\\""),
                             note.location().lat(), note.location().lon(),
                             note.createdAt()))
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.joining(",\n"));
             return """
-                    { "notes": [ %s ] }
+                    {
+                        "notes": [
+                            %s
+                        ]
+                    }
                     """.formatted(notesList);
         }
     }
